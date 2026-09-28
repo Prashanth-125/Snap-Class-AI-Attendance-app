@@ -20,7 +20,7 @@ def style_background_dasboard():
     st.markdown("""
             <style>
                 .stApp{
-                    background: #EOE3FF;
+                    background: #E0E3FF;
                 }
                 
 
