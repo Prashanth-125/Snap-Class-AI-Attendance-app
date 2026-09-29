@@ -4,14 +4,14 @@ import streamlit as st
 import face_recognition_models 
 from sklearn.svm import SVC
 
-from src.databases.db import get_all_students
+from src.database.db import get_all_students
 
 @st.cache_resource 
 def load_dlib_models():
 
     detector = dlib.get_frontal_face_detector()
 
-    sp = dlib.shape_detector(
+    sp = dlib.shape_predictor(
         face_recognition_models.pose_predictor_model_location()
     )
 
@@ -52,13 +52,13 @@ def get_trained_model():
             y.append(student.get('student_id'))
 
     if len(X) == 0:
-        return 0
+        return None
 
     clf = SVC(kernel='linear',probability=True,class_weight='balanced')
 
     try:
         clf.fit(X,y)
-    except Valueerror:
+    except ValueError:
         pass
 
     return {'clf':clf,"X":X,"y":y}
@@ -73,10 +73,10 @@ def predict_attendence(class_image_np):
 
     detected_student = {}
 
-    if not(encodings):
-        return detected_student,[],len(encodings)
-
     model_data = get_trained_model()
+
+    if model_data is None:
+        return detected_student, [], len(encodings)
 
     clf = model_data['clf']
     X_train = model_data['X']
@@ -97,7 +97,7 @@ def predict_attendence(class_image_np):
         resemblance_threshold = 0.6
 
         if best_match_score <= resemblance_threshold:
-            detected_student["predicted_id"]=True 
+            detected_student[predicted_id]=True 
 
     return detected_student,all_students,len(encodings)
 

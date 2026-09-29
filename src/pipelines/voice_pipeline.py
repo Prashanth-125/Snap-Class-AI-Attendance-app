@@ -4,6 +4,7 @@ from resemblyzer import VoiceEncoder,preprocess_wav
 import streamlit as st 
 import librosa 
 
+
 @st.cache_resource
 def load_voice_encoder():
     return VoiceEncoder()
