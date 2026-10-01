@@ -5,7 +5,7 @@ import segno
 @st.dialog("Share Class Link")
 def share_subject_dialog(sub_name,sub_code):
 
-    app_domain = "snapclass-main.streamlit.app"
+    app_domain = "snapclass-main14.streamlit.app"
     join_url = f"{app_domain}/?join-code={sub_code}"
 
     qr = segno.make(join_url)
