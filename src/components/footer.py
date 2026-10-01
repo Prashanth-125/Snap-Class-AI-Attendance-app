@@ -10,7 +10,7 @@ def home_footer():
 
                 """,unsafe_allow_html=True)
 
-def dashboard_footer():
+def footer_dashboard():
 
     st.markdown(f"""
 

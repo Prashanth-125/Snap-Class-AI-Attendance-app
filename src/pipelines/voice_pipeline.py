@@ -22,7 +22,7 @@ def get_voice_embedding(audio_bytes):
         return None
 
 def identify_speaker(new_embedding,candidates_dict,threshold=0.65):
-    if not new_embedding or len(candidates_dict)==0 :
+    if new_embedding is None or len(candidates_dict)==0 or len(new_embedding) == 0:
         return None 
 
     best_sid = None 
@@ -50,7 +50,7 @@ def process_bulk_audio(audio_bytes,candidates_dict,threshold=0.65):
         identified_results = {}
 
         for start,end in segments:
-            if (end-start) > sr*0.5 :
+            if (end-start) < sr*0.5 :
                 continue 
             
             segment_audio = audio[start:end]
@@ -65,7 +65,7 @@ def process_bulk_audio(audio_bytes,candidates_dict,threshold=0.65):
 
         return identified_results
     except Exception as e:
-        st.error("Bulk process error")
+        st.error(f"Bulk process error {e}")
         return {}
 
 

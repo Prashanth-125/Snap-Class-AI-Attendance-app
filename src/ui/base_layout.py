@@ -16,7 +16,7 @@ def style_background_home():
             </style>
                 """,unsafe_allow_html=True)
 
-def style_background_dasboard():
+def style_background_dashboard():
     st.markdown("""
             <style>
                 .stApp{
@@ -61,7 +61,7 @@ def style_base_layout():
                     font-family:'Outfit',sans-serif !important;
                 }
 
-                button {
+                button[kind="primary"] {
                     background: #5865F2 !important;
                     color:white !important;
                     padding: 10px 20px !important;
